@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Click - Cardápio Digital</title>
+    <style>
+        :root {
+            --primary: #FF3838;
+            --primary-hover: #E02424;
+            --secondary: #FFB300;
+            --background: #F8F9FA;
+            --surface: #FFFFFF;
+            --text: #2D3436;
+            --text-muted: #636E72;
+            --border: #EFEFEF;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--background); color: var(--text); padding-bottom: 90px; }
+        header { background: linear-gradient(135deg, #1e1e24 0%, #0a0a0c 100%); color: white; padding: 30px 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        header h1 { font-size: 1.8rem; color: var(--secondary); margin-bottom: 5px; }
+        header p { font-size: 0.9rem; opacity: 0.8; }
+        .container { padding: 15px; max-width: 500px; margin: 0 auto; }
+        .category-title { font-size: 1.2rem; margin: 20px 0 10px 0; padding-left: 5px; border-left: 4px solid var(--primary); font-weight: 700; }
+        .product-card { background: var(--surface); border-radius: 12px; padding: 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .product-info { flex: 1; padding-right: 10px; }
+        .product-name { font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
+        .product-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.3; margin-bottom: 8px; }
+        .product-price { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+        .quantity-controls { display: flex; align-items: center; background: #F1F2F6; border-radius: 20px; padding: 2px; height: 36px; }
+        .btn-qty { background: transparent; border: none; color: var(--text); font-size: 1.2rem; font-weight: bold; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .btn-qty.plus { color: var(--primary); }
+        .qty-number { font-weight: bold; min-width: 24px; text-align: center; font-size: 1rem; }
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); box-shadow: 0 -4px 10px rgba(0,0,0,0.08); padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 99; }
+        .cart-info h4 { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+        .cart-info p { font-size: 1.3rem; font-weight: bold; color: var(--text); }
+        .btn-cart { background-color: var(--primary); color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: flex-end; z-index: 100; }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--surface); width: 100%; max-width: 500px; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px; max-height: 90vh; overflow-y: auto; animation: slideUp 0.25s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .modal h2 { font-size: 1.3rem; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+        .modal h3 { font-size: 1.05rem; margin: 20px 0 10px 0; color: var(--text); }
+        .review-cart-list { max-height: 180px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; background: #FAFAFA; }
+        .review-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .review-item:last-child { border-bottom: none; }
+        .review-item-details { flex: 1; padding-right: 10px; }
+        .review-item-name { font-weight: 600; font-size: 0.95rem; }
+        .review-item-price { font-size: 0.85rem; color: var(--primary); font-weight: bold; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; color: var(--text); }
+        .form-group input, .form-group select { width: 100%; padding: 11px; border: 1px solid #DDD; border-radius: 8px; font-size: 0.95rem; outline: none; background-color: #FFF; }
+        .radio-group { display: flex; gap: 15px; margin-top: 5px; }
+        .radio-option { display: flex; align-items: center; gap: 6px; font-size: 0.95rem; cursor: pointer; }
+        .hidden { display: none !important; }
+        .review-totals { background: #FFF9E6; padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.95rem; }
+        .review-total-line { display: flex; justify-content: space-between; margin-bottom: 6px; }
+        .review-total-line:last-child { margin-bottom: 0; font-weight: bold; font-size: 1.1rem; border-top: 1px dashed #DDD; padding-top: 6px; color: var(--text); }
+        .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-cancel { flex: 1; background: #F1F2F6; color: var(--text); border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .btn-submit { flex: 2; background: #25D366; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Burger Click</h1>
+        <p>🍔 Hambúrgueres Artesanais sob medida!</p>
+    </header>
+    <div class="container">
+        <div class="category-title">Hambúrgueres</div>
+        <div class="product-card">
+            <div class="product-info">
+                <div class="product-name">Smash Burger Clássico</div>
+                <div class="product-desc">Pão brioche, carne de 90g, queijo cheddar derretido e maionese da casa.</div>
+                <div class="product-price">R$ 22,00</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty" onclick="changeQuantity('Smash Burger Clássico', 22.00, -1)">-</button>
+                <div class="qty-number" id="main-qty-Smash-Burger-Clássico">0</div>
+                <button class="btn-qty plus" onclick="changeQuantity('Smash Burger Clássico', 22.00, 1)">+</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <div class="product-name">Duplo Bacon Cheddar</div>
+                <div class="product-desc">Dois blends de 120g, muito bacon crocante, triplo cheddar e barbecue.</div>
+                <div class="product-price">R$ 34,90</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty" onclick="changeQuantity('Duplo Bacon Cheddar', 34.90, -1)">-</button>
+                <div class="qty-number" id="main-qty-Duplo-Bacon-Cheddar">0</div>
+                <button class="btn-qty plus" onclick="changeQuantity('Duplo Bacon Cheddar', 34.90, 1)">+</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <div class="product-name">Monster Chicken</div>
+                <div class="product-desc">Frango empanado super crocante, alface, tomate e molho agridoce.</div>
+                <div class="product-price">R$ 26,00</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty" onclick="changeQuantity('Monster Chicken', 26.00, -1)">-</button>
+                <div class="qty-number" id="main-qty-Monster-Chicken">0</div>
+                <button class="btn-qty plus" onclick="changeQuantity('Monster Chicken', 26.00, 1)">+</button>
+            </div>
+        </div>
+        <div class="category-title">Acompanhamentos</div>
+        <div class="product-card">
+            <div class="product-info">
+                <div class="product-name">Batata Frita Palito</div>
+                <div class="product-desc">Batatas fritas crocantes e sequinhas acompanhadas de molho buster.</div>
+                <div class="product-price">R$ 12,00</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty" onclick="changeQuantity('Batata Frita Palito', 12.00, -1)">-</button>
+                <div class="qty-number" id="main-qty-Batata-Frita-Palito">0</div>
+                <button class="btn-qty plus" onclick="changeQuantity('Batata Frita Palito', 12.00, 1)">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="cart-bar">
+        <div class="cart-info">
+            <h4 id="cart-count">Nenhum item selecionado</h4>
+            <p id="cart-total">R$ 0,00</p>
+        </div>
+        <button class="btn-cart" onclick="openReviewModal()">Ver Pedido</button>
+    </div>
+    <div class="modal" id="review-modal">
+        <div class="modal-content">
+            <h2>Resumo do Pedido</h2>
+            <h3>Seus itens selecionados:</h3>
+            <div class="review-cart-list" id="review-cart-items"></div>
+            <div class="review-totals">
+                <div class="review-total-line"><span>Subtotal itens:</span><span id="review-subtotal">R$ 0,00</span></div>
+                <div class="review-total-line" id="review-delivery-row"><span>Taxa de Entrega:</span><span id="review-delivery-fee">R$ 7,00</span></div>
+                <div class="review-total-line"><span>Total do Pedido:</span><span id="review-final-total">R$ 0,00</span></div>
+            </div>
+            <h3>Informações para Finalizar:</h3>
+            <form id="order-form" onsubmit="sendOrder(event)">
+                <div class="form-group"><label for="name">Seu Nome *</label><input type="text" id="name" required placeholder="Ex: João Silva"></div>
+                <div class="form-group"><label for="phone">Número de Telefone / WhatsApp *</label><input type="tel" id="phone" required placeholder="Ex: (33) 99999-9999"></div>
+                <div class="form-group">
+                    <label>Como deseja receber? *</label>
+                    <div class="radio-group">
+                        <label class="radio-option"><input type="radio" name="delivery-method" value="delivery" checked onchange="toggleAddressVisibility(true)"> Delivery (Entrega)</label>
+                        <label class="radio-option"><input type="radio" name="delivery-method" value="pickup" onchange="toggleAddressVisibility(false)"> Retirada na Loja</label>
+                    </div>
+                </div>
+                <div class="form-group" id="address-section"><label for="address">Endereço Completo de Entrega *</label><input type="text" id="address" required placeholder="Rua, número, bairro, apto"></div>
+                <div class="form-group">
+                    <label for="payment">Forma de Pagamento *</label>
+                    <select id="payment" required>
+                        <option value="">Selecione uma opção...</option>
+                        <option value="Pix">Pix</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                        <option value="Cartão de Débito">Cartão de Débito</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeReviewModal()">Adicionar Mais</button>
+                    <button type="submit" class="btn-submit">Enviar via WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const WHATSAPP_NUMBER = "5533999648737"; 
+        const DELIVERY_FEE = 7.00; 
+        let cart = [];
+        let total = 0;
+
+        function changeQuantity(name, price, change) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += change;
+                if (existingItem.quantity <= 0) { cart = cart.filter(item => item.name !== name); }
+            } else if (change > 0) {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateInterface(name);
+            renderReviewCartList(); 
+        }
+
+        function updateInterface(name) {
+            const item = cart.find(i => i.name === name);
+            const mainQtyId = `main-qty-${name.replace(/\s+/g, '-')}`;
+            const mainQtyElement = document.getElementById(mainQtyId);
+            if (mainQtyElement) { mainQtyElement.innerText = item ? item.quantity : 0; }
+            const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+            total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            const cartCountElement = document.getElementById('cart-count');
+            if (count > 0) { cartCountElement.innerText = `${count} ${count === 1 ? 'item' : 'itens'}`; } 
+            else { cartCountElement.innerText = "Nenhum item selecionado"; }
+            document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        function renderReviewCartList() {
+            const listContainer = document.getElementById('review-cart-items');
+            listContainer.innerHTML = "";
+            if (cart.length === 0) {
+                listContainer.innerHTML = `<div style="text-align:center; color:#636E72; padding:15px; font-size:0.9rem;">Carrinho vazio.</div>`;
+                updateReviewTotals();
+                return;
+            }
+            cart.forEach(item => {
+                const itemRow = document.createElement('div');
+                itemRow.className = 'review-item';
+                itemRow.innerHTML = `
+                    <div class="review-item-details">
+                        <div class="review-item-name">${item.name}</div>
+                        <div class="review-item-price">R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</div>
+                    </div>
+                    <div class="quantity-controls">
+                        <button type="button" class="btn-qty" onclick="changeQuantity('${item.name}', ${item.price}, -1)">-</button>
+                        <div class="qty-number">${item.quantity}</div>
+                        <button type="button" class="btn-qty plus" onclick="changeQuantity('${item.name}', ${item.price}, 1)">+</button>
+                    </div>`;
+                listContainer.appendChild(itemRow);
+            });
+            updateReviewTotals();
+        }
+
+        function updateReviewTotals() {
+            const isDelivery = document.querySelector('input[name="delivery-method"]:checked').value === "delivery";
+            const currentDeliveryFee = isDelivery ? DELIVERY_FEE : 0;
+            const finalTotal = total + currentDeliveryFee;
+            document.getElementById('review-subtotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            document.getElementById('review-delivery-fee').innerText = `R$ ${DELIVERY_FEE.toFixed(2).replace('.', ',')}`;
+            document.getElementById('review-final-total').innerText = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+            const deliveryRow = document.getElementById('review-delivery-row');
+            if (isDelivery) { deliveryRow.classList.remove('hidden'); } else { deliveryRow.classList.add('hidden'); }
+        }
+
+        function openReviewModal() {
+            if (cart.length === 0) { alert("Seu carrinho está vazio!"); return; }
+            renderReviewCartList();
+            document.getElementById('review-modal').classList.add('active');
+        }
+
+        function closeReviewModal() { document.getElementById('review-modal').classList.remove('active'); }
+
+        function toggleAddressVisibility(show) {
+            const addressSection = document.getElementById('address-section');
+            const addressInput = document.getElementById('address');
+            if (show) { addressSection.classList.remove('hidden'); addressInput.required = true; } 
+            else { addressSection.classList.add('hidden'); addressInput.required = false; }
+            updateReviewTotals();
+        }
+
+        function sendOrder(event) {
+            event.preventDefault();
+            if (cart.length === 0) { alert("Adicione itens antes!"); return; }
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const method = document.querySelector('input[name="delivery-method"]:checked').value;
+            const address = document.getElementById('address').value;
+            const payment = document.getElementById('payment').value;
+            let itemsText = "";
+            cart.forEach(item => { itemsText += `• *${item.quantity}x* ${item.name} (R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')})\n`; });
+            const isDelivery = method === "delivery";
+            const finalTotal = isDelivery ? (total + DELIVERY_FEE) : total;
+            let message = `🍔 *NOVO PEDIDO CONFIRMADO* 🍔\n\n👤 *Cliente:* ${name}\n📞 *Contato:* ${phone}\n📌 *Modalidade:* ${isDelivery ? "🛵 Delivery" : "🛍️ Retirada"}\n`;
+            if (isDelivery) { message += `📍 *Endereço:* ${address}\n`; }
+            message += `💳 *Pagamento:* ${payment}\n\n🛒 *Itens:*\n${itemsText}\n`;
+            if (isDelivery) { message += `Subtotal: R$ ${total.toFixed(2).replace('.', ',')}\nTaxa: R$ ${DELIVERY_FEE.toFixed(2).replace('.', ',')}\n`; }
+            message += `💰 *Total Geral: R$ ${finalTotal.toFixed(2).replace('.', ',')}*`;
+            window.open(`https://whatsapp.com{WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
