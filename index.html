@@ -2,270 +2,1721 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burger Click - Cardápio Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cardápio Digital</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #FF3838;
-            --primary-hover: #E02424;
-            --secondary: #FFB300;
-            --background: #F8F9FA;
-            --surface: #FFFFFF;
-            --text: #2D3436;
-            --text-muted: #636E72;
-            --border: #EFEFEF;
+            --bg-color: #f8f9fa;
+            --header-bg: #121212;
+            --header-title: #ffd700;
+            --accent-yellow: #f59e0b;
+            --accent-yellow-hover: #d97706;
+            --btn-text-color: #000000;
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --danger-color: #ef4444;
+            --success-color: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--background); color: var(--text); padding-bottom: 90px; }
-        header { background: linear-gradient(135deg, #1e1e24 0%, #0a0a0c 100%); color: white; padding: 30px 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        header h1 { font-size: 1.8rem; color: var(--secondary); margin-bottom: 5px; }
-        header p { font-size: 0.9rem; opacity: 0.8; }
-        .container { padding: 15px; max-width: 500px; margin: 0 auto; }
-        .category-title { font-size: 1.2rem; margin: 20px 0 10px 0; padding-left: 5px; border-left: 4px solid var(--primary); font-weight: 700; }
-        .product-card { background: var(--surface); border-radius: 12px; padding: 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-        .product-info { flex: 1; padding-right: 10px; }
-        .product-name { font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
-        .product-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.3; margin-bottom: 8px; }
-        .product-price { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
-        .quantity-controls { display: flex; align-items: center; background: #F1F2F6; border-radius: 20px; padding: 2px; height: 36px; }
-        .btn-qty { background: transparent; border: none; color: var(--text); font-size: 1.2rem; font-weight: bold; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .btn-qty.plus { color: var(--primary); }
-        .qty-number { font-weight: bold; min-width: 24px; text-align: center; font-size: 1rem; }
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); box-shadow: 0 -4px 10px rgba(0,0,0,0.08); padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 99; }
-        .cart-info h4 { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
-        .cart-info p { font-size: 1.3rem; font-weight: bold; color: var(--text); }
-        .btn-cart { background-color: var(--primary); color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: bold; font-size: 1rem; cursor: pointer; }
-        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: flex-end; z-index: 100; }
-        .modal.active { display: flex; }
-        .modal-content { background: var(--surface); width: 100%; max-width: 500px; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px; max-height: 90vh; overflow-y: auto; animation: slideUp 0.25s ease-out; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .modal h2 { font-size: 1.3rem; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-        .modal h3 { font-size: 1.05rem; margin: 20px 0 10px 0; color: var(--text); }
-        .review-cart-list { max-height: 180px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; background: #FAFAFA; }
-        .review-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
-        .review-item:last-child { border-bottom: none; }
-        .review-item-details { flex: 1; padding-right: 10px; }
-        .review-item-name { font-weight: 600; font-size: 0.95rem; }
-        .review-item-price { font-size: 0.85rem; color: var(--primary); font-weight: bold; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; color: var(--text); }
-        .form-group input, .form-group select { width: 100%; padding: 11px; border: 1px solid #DDD; border-radius: 8px; font-size: 0.95rem; outline: none; background-color: #FFF; }
-        .radio-group { display: flex; gap: 15px; margin-top: 5px; }
-        .radio-option { display: flex; align-items: center; gap: 6px; font-size: 0.95rem; cursor: pointer; }
-        .hidden { display: none !important; }
-        .review-totals { background: #FFF9E6; padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.95rem; }
-        .review-total-line { display: flex; justify-content: space-between; margin-bottom: 6px; }
-        .review-total-line:last-child { margin-bottom: 0; font-weight: bold; font-size: 1.1rem; border-top: 1px dashed #DDD; padding-top: 6px; color: var(--text); }
-        .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
-        .btn-cancel { flex: 1; background: #F1F2F6; color: var(--text); border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .btn-submit { flex: 2; background: #25D366; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 80px; /* Space for sticky bar */
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: #ffffff;
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header-title {
+            color: var(--header-title);
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .header-subtitle {
+            font-size: 0.85rem;
+            color: #d1d5db;
+            margin-top: 4px;
+        }
+
+        .header-info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #f3f4f6;
+        }
+
+        main {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 16px;
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Loading Spinner */
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid var(--accent-yellow);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Companies Hub Grid */
+        .company-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .company-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .company-card:active {
+            transform: scale(0.98);
+        }
+
+        .company-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .company-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .company-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 4px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .company-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Categories Bar */
+        .category-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            scrollbar-width: none;
+        }
+
+        .category-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-chip {
+            background: #e5e7eb;
+            color: var(--text-dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+            text-transform: capitalize;
+            transition: all 0.2s;
+        }
+
+        .category-chip.active {
+            background: var(--header-bg);
+            color: var(--header-title);
+        }
+
+        .product-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .product-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: #f3f4f6;
+            flex-shrink: 0;
+        }
+
+        .product-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .product-description {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.3;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 6px;
+        }
+
+        .product-price {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #059669;
+        }
+
+        .btn-add {
+            background-color: var(--accent-yellow);
+            color: var(--btn-text-color);
+            border: none;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+            transition: background-color 0.2s;
+        }
+
+        .btn-add:hover, .btn-add:active {
+            background-color: var(--accent-yellow-hover);
+        }
+
+        .sticky-cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--header-bg);
+            color: #ffffff;
+            padding: 12px 16px;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+        }
+
+        .sticky-cart-inner {
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-bar-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-bar-count {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .cart-bar-total {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--header-title);
+        }
+
+        .btn-view-cart {
+            background-color: var(--accent-yellow);
+            color: var(--btn-text-color);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(2px);
+            z-index: 100;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 20px 20px 0 0;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.25s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .btn-close {
+            background: #f3f4f6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Compositions / Checkbox list */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .option-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-yellow);
+        }
+
+        /* Quantity controls */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+            margin: 12px 0;
+        }
+
+        .btn-qty {
+            background: #e5e7eb;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        /* Cart Items List */
+        .cart-items-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .cart-item-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .cart-item-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .cart-item-price {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #059669;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-yellow);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 16px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .radio-label input {
+            accent-color: var(--accent-yellow);
+        }
+
+        .checkout-summary {
+            background: #f3f4f6;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .summary-total {
+            font-weight: 800;
+            font-size: 1rem;
+            border-top: 1px solid #d1d5db;
+            padding-top: 6px;
+            margin-top: 2px;
+            color: var(--text-dark);
+        }
+
+        .btn-submit {
+            background-color: var(--accent-yellow);
+            color: var(--btn-text-color);
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-yellow-hover);
+        }
+
+        .error-msg {
+            color: var(--danger-color);
+            font-size: 0.75rem;
+            display: none;
+        }
+
+        .input-error {
+            border-color: var(--danger-color) !important;
+        }
+
+        /* Toast Alert */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: #1f2937;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            z-index: 200;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Footer Powered By */
+        .footer-powered {
+            text-align: center;
+            padding: 24px 12px 12px 12px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .footer-powered strong {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .checkout-alert-info {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
     </style>
+    <link id="favicon" rel="icon" type="image/png" href="imagens/logo-cardapio.png">
 </head>
 <body>
-    <header>
-        <h1>Burger Click</h1>
-        <p>🍔 Hambúrgueres Artesanais sob medida!</p>
+
+    <header id="main-header">
+        <div class="header-content">
+            <h1 class="header-title" id="header-title">
+                <i class="fa-solid fa-utensils"></i>
+                Cardápio Digital
+            </h1>
+            <div id="company-info-container">
+                <p class="header-subtitle" id="header-subtitle">Selecione um estabelecimento para fazer seu pedido</p>
+            </div>
+        </div>
     </header>
-    <div class="container">
-        <div class="category-title">Hambúrgueres</div>
-        <div class="product-card">
-            <div class="product-info">
-                <div class="product-name">Smash Burger Clássico</div>
-                <div class="product-desc">Pão brioche, carne de 90g, queijo cheddar derretido e maionese da casa.</div>
-                <div class="product-price">R$ 22,00</div>
-            </div>
-            <div class="quantity-controls">
-                <button class="btn-qty" onclick="changeQuantity('Smash Burger Clássico', 22.00, -1)">-</button>
-                <div class="qty-number" id="main-qty-Smash-Burger-Clássico">0</div>
-                <button class="btn-qty plus" onclick="changeQuantity('Smash Burger Clássico', 22.00, 1)">+</button>
-            </div>
+
+    <main id="app-container">
+        <!-- Content will be rendered dynamically -->
+        <div class="loader-container" id="main-loader">
+            <div class="spinner"></div>
+            <p style="font-size:0.85rem; color:#6b7280;">Carregando cardápio...</p>
         </div>
-        <div class="product-card">
-            <div class="product-info">
-                <div class="product-name">Duplo Bacon Cheddar</div>
-                <div class="product-desc">Dois blends de 120g, muito bacon crocante, triplo cheddar e barbecue.</div>
-                <div class="product-price">R$ 34,90</div>
+    </main>
+
+    <div class="sticky-cart-bar" id="cart-bar" style="display: none;">
+        <div class="sticky-cart-inner">
+            <div class="cart-bar-info">
+                <span class="cart-bar-count" id="cart-count-text">0 itens selecionados</span>
+                <span class="cart-bar-total" id="cart-total-text">R$ 0,00</span>
             </div>
-            <div class="quantity-controls">
-                <button class="btn-qty" onclick="changeQuantity('Duplo Bacon Cheddar', 34.90, -1)">-</button>
-                <div class="qty-number" id="main-qty-Duplo-Bacon-Cheddar">0</div>
-                <button class="btn-qty plus" onclick="changeQuantity('Duplo Bacon Cheddar', 34.90, 1)">+</button>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-info">
-                <div class="product-name">Monster Chicken</div>
-                <div class="product-desc">Frango empanado super crocante, alface, tomate e molho agridoce.</div>
-                <div class="product-price">R$ 26,00</div>
-            </div>
-            <div class="quantity-controls">
-                <button class="btn-qty" onclick="changeQuantity('Monster Chicken', 26.00, -1)">-</button>
-                <div class="qty-number" id="main-qty-Monster-Chicken">0</div>
-                <button class="btn-qty plus" onclick="changeQuantity('Monster Chicken', 26.00, 1)">+</button>
-            </div>
-        </div>
-        <div class="category-title">Acompanhamentos</div>
-        <div class="product-card">
-            <div class="product-info">
-                <div class="product-name">Batata Frita Palito</div>
-                <div class="product-desc">Batatas fritas crocantes e sequinhas acompanhadas de molho buster.</div>
-                <div class="product-price">R$ 12,00</div>
-            </div>
-            <div class="quantity-controls">
-                <button class="btn-qty" onclick="changeQuantity('Batata Frita Palito', 12.00, -1)">-</button>
-                <div class="qty-number" id="main-qty-Batata-Frita-Palito">0</div>
-                <button class="btn-qty plus" onclick="changeQuantity('Batata Frita Palito', 12.00, 1)">+</button>
-            </div>
+            <button class="btn-view-cart" onclick="openCartModal()">
+                <i class="fa-solid fa-cart-shopping"></i> Ver Pedido
+            </button>
         </div>
     </div>
-    <div class="cart-bar">
-        <div class="cart-info">
-            <h4 id="cart-count">Nenhum item selecionado</h4>
-            <p id="cart-total">R$ 0,00</p>
-        </div>
-        <button class="btn-cart" onclick="openReviewModal()">Ver Pedido</button>
-    </div>
-    <div class="modal" id="review-modal">
+
+    <div class="modal-overlay" id="product-modal">
         <div class="modal-content">
-            <h2>Resumo do Pedido</h2>
-            <h3>Seus itens selecionados:</h3>
-            <div class="review-cart-list" id="review-cart-items"></div>
-            <div class="review-totals">
-                <div class="review-total-line"><span>Subtotal itens:</span><span id="review-subtotal">R$ 0,00</span></div>
-                <div class="review-total-line" id="review-delivery-row"><span>Taxa de Entrega:</span><span id="review-delivery-fee">R$ 7,00</span></div>
-                <div class="review-total-line"><span>Total do Pedido:</span><span id="review-final-total">R$ 0,00</span></div>
+            <div class="modal-header">
+                <h3 class="modal-title" id="p-modal-title">Detalhes do Produto</h3>
+                <button class="btn-close" onclick="closeProductModal()">&times;</button>
             </div>
-            <h3>Informações para Finalizar:</h3>
-            <form id="order-form" onsubmit="sendOrder(event)">
-                <div class="form-group"><label for="name">Seu Nome *</label><input type="text" id="name" required placeholder="Ex: João Silva"></div>
-                <div class="form-group"><label for="phone">Número de Telefone / WhatsApp *</label><input type="tel" id="phone" required placeholder="Ex: (33) 99999-9999"></div>
+            
+            <p id="p-modal-desc" style="font-size: 0.85rem; color: var(--text-muted);"></p>
+            <p id="p-modal-price" style="font-size: 1.1rem; font-weight: 700; color: #059669;"></p>
+
+            <div>
+                <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 6px;">Composição & Opcionais:</h4>
+                <div class="options-list" id="p-modal-options">
+                    <!-- Dynamic Checkboxes -->
+                </div>
+            </div>
+
+            <div class="quantity-control">
+                <button class="btn-qty" onclick="adjustProductQty(-1)">-</button>
+                <span class="qty-value" id="p-modal-qty">1</span>
+                <button class="btn-qty" onclick="adjustProductQty(1)">+</button>
+            </div>
+
+            <button class="btn-submit" onclick="confirmAddToCart()">
+                <i class="fa-solid fa-plus"></i> Adicionar ao Carrinho
+            </button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Seu Pedido</h3>
+                <button class="btn-close" onclick="closeCartModal()">&times;</button>
+            </div>
+
+            <div class="cart-items-container" id="cart-items-list">
+                <!-- Cart items list dynamically populated -->
+            </div>
+
+            <!-- Form -->
+            <form id="checkout-form" onsubmit="handleCheckout(event)" style="display:flex; flex-direction:column; gap:12px;">
+                
                 <div class="form-group">
-                    <label>Como deseja receber? *</label>
+                    <label class="form-label">Tipo de Entrega *</label>
                     <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="delivery-method" value="delivery" checked onchange="toggleAddressVisibility(true)"> Delivery (Entrega)</label>
-                        <label class="radio-option"><input type="radio" name="delivery-method" value="pickup" onchange="toggleAddressVisibility(false)"> Retirada na Loja</label>
+                        <label class="radio-label">
+                            <input type="radio" name="tipoEntrega" value="delivery" checked onchange="toggleAddressField(true)">
+                            Delivery
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="tipoEntrega" value="retirada" onchange="toggleAddressField(false)">
+                            Retirada na Loja
+                        </label>
                     </div>
                 </div>
-                <div class="form-group" id="address-section"><label for="address">Endereço Completo de Entrega *</label><input type="text" id="address" required placeholder="Rua, número, bairro, apto"></div>
+
                 <div class="form-group">
-                    <label for="payment">Forma de Pagamento *</label>
-                    <select id="payment" required>
-                        <option value="">Selecione uma opção...</option>
-                        <option value="Pix">Pix</option>
-                        <option value="Cartão de Crédito">Cartão de Crédito</option>
-                        <option value="Cartão de Débito">Cartão de Débito</option>
-                        <option value="Dinheiro">Dinheiro</option>
+                    <label class="form-label" for="c-nome">Nome Completo *</label>
+                    <input type="text" id="c-nome" class="form-control" placeholder="Seu nome completo" minlength="3" maxlength="50" required>
+                    <span class="error-msg" id="err-nome">Informe seu nome (3 a 50 caracteres)</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="c-telefone">Telefone / WhatsApp *</label>
+                    <input type="tel" id="c-telefone" class="form-control" placeholder="(11) 99999-9999" minlength="8" maxlength="14" required>
+                    <span class="error-msg" id="err-telefone">Telefone inválido (8 a 14 dígitos)</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="c-pagamento">Forma de Pagamento *</label>
+                    <select id="c-pagamento" class="form-control" required onchange="handlePaymentChange(this.value)">
+                        <option value="PIX">PIX</option>
+                        <option value="CARTÃO">Cartão de Crédito/Débito</option>
+                        <option value="DINHEIRO">Dinheiro</option>
                     </select>
                 </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn-cancel" onclick="closeReviewModal()">Adicionar Mais</button>
-                    <button type="submit" class="btn-submit">Enviar via WhatsApp</button>
+
+                <div class="form-group" id="troco-group" style="display: none;">
+                    <label class="form-label" for="c-troco">Precisa de troco para quanto?</label>
+                    <input type="text" id="c-troco" class="form-control" placeholder="Ex: R$ 50,00">
+                </div>
+
+                <div class="form-group" id="endereco-group">
+                    <label class="form-label" for="c-endereco">Endereço Completo *</label>
+                    <input type="text" id="c-endereco" class="form-control" placeholder="Rua, número, bairro, compl." minlength="8" maxlength="60" required>
+                    <span class="error-msg" id="err-endereco">Endereço é obrigatório (8 a 60 caracteres)</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="c-obs">Observações do Pedido</label>
+                    <input type="text" id="c-obs" class="form-control" placeholder="Ex: Sem cebola, capricha no molho">
+                </div>
+
+                <div class="checkout-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="sum-subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="summary-row" id="sum-taxa-row">
+                        <span>Taxa de Entrega:</span>
+                        <span id="sum-taxa">R$ 0,00</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total:</span>
+                        <span id="sum-total">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Finalizar Pedido via WhatsApp
+                    </button>
+                    <p class="checkout-alert-info">
+                        <i class="fa-solid fa-circle-info"></i> O seu pedido só será finalizado após o envio no WhatsApp.
+                    </p>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- Toast Component -->
+    <div class="toast" id="toast-message">Mensagem de aviso</div>
+
     <script>
-        const WHATSAPP_NUMBER = "5533999648737"; 
-        const DELIVERY_FEE = 7.00; 
-        let cart = [];
-        let total = 0;
+        const EMPRESAS_URL = "https://gist.githubusercontent.com/gustavoamorimqueiroz1/48d44c95e0c3c8ecb376a23fd3bf4084/raw/empresas.txt";
+        const WHATSAPP_TARGET = "5533999648737";
 
-        function changeQuantity(name, price, change) {
-            const existingItem = cart.find(item => item.name === name);
-            if (existingItem) {
-                existingItem.quantity += change;
-                if (existingItem.quantity <= 0) { cart = cart.filter(item => item.name !== name); }
-            } else if (change > 0) {
-                cart.push({ name, price, quantity: 1 });
+        // Application State
+        let state = {
+            empresas: [],
+            currentCompany: null,
+            products: [],
+            categories: [],
+            selectedCategory: 'todas',
+            cart: [],
+            activeModalProduct: null,
+            activeProductQty: 1,
+            selectedOptions: []
+        };
+
+        // Fallback default high-definition food images
+        const CATEGORY_IMAGES = {
+            hamburguer: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop&q=80",
+            pizza: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&auto=format&fit=crop&q=80",
+            bebida: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&auto=format&fit=crop&q=80",
+            sobremesa: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&auto=format&fit=crop&q=80",
+            prato: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop&q=80",
+            almoco: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop&q=80",
+            acompanhamento: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=400&auto=format&fit=crop&q=80",
+            generic: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&auto=format&fit=crop&q=80"
+        };
+
+        // Helper: Format Currency (BRL)
+        function formatMoney(value) {
+            const val = parseFloat(value) || 0;
+            return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // Helper: Show Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast-message');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Helper: Safe JSON Parser
+        function safeJSONParse(rawText) {
+            try {
+                return JSON.parse(rawText);
+            } catch (e) {
+                let cleaned = rawText
+                    .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":')
+                    .replace(/,\s*([\]}])/g, '$1')
+                    .replace(/'/g, '"');
+                return JSON.parse(cleaned);
             }
-            updateInterface(name);
-            renderReviewCartList(); 
         }
 
-        function updateInterface(name) {
-            const item = cart.find(i => i.name === name);
-            const mainQtyId = `main-qty-${name.replace(/\s+/g, '-')}`;
-            const mainQtyElement = document.getElementById(mainQtyId);
-            if (mainQtyElement) { mainQtyElement.innerText = item ? item.quantity : 0; }
-            const count = cart.reduce((acc, item) => acc + item.quantity, 0);
-            total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-            const cartCountElement = document.getElementById('cart-count');
-            if (count > 0) { cartCountElement.innerText = `${count} ${count === 1 ? 'item' : 'itens'}`; } 
-            else { cartCountElement.innerText = "Nenhum item selecionado"; }
-            document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        window.addEventListener('DOMContentLoaded', initApp);
+        window.addEventListener('popstate', handleRouting);
+
+        async function initApp() {
+            await fetchCompanies();
+            handleRouting();
         }
 
-        function renderReviewCartList() {
-            const listContainer = document.getElementById('review-cart-items');
-            listContainer.innerHTML = "";
-            if (cart.length === 0) {
-                listContainer.innerHTML = `<div style="text-align:center; color:#636E72; padding:15px; font-size:0.9rem;">Carrinho vazio.</div>`;
-                updateReviewTotals();
+        function getCompanyIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('empresa')) return urlParams.get('empresa');
+            
+            if (window.location.hash) {
+                return window.location.hash.replace('#empresa-', '').replace('#', '');
+            }
+            return null;
+        }
+
+        async function fetchCompanies() {
+            // try {
+            //     const response = await fetch(EMPRESAS_URL);
+            //     const rawText = await response.text();
+            //     const data = safeJSONParse(rawText);
+                
+            //     // Map and sanitize active companies
+            //     state.empresas = data
+            //         .map(item => item.empresa)
+            //         .filter(emp => emp && emp.ativa !== false);
+
+            // } catch (err) {
+            try {
+                const rawText = retornaEmpresas();
+                const data = safeJSONParse(rawText);
+            
+                state.empresas = data
+                    .map(item => item.empresa)
+                    .filter(emp => emp && emp.ativa !== false);
+            } catch(err) {
+                console.error("Erro ao carregar empresas:", err);
+                showToast("Erro ao carregar lista de estabelecimentos.");
+            }
+        //   }
+        }
+
+        async function handleRouting() {
+            const companyId = getCompanyIdFromURL();
+
+            if (companyId) {
+                const company = state.empresas.find(e => e.id === companyId);
+                if (company) {
+                    state.currentCompany = company;
+                    await loadCompanyMenu(company);
+                    return;
+                }
+            }
+
+            state.currentCompany = null;
+            renderCompaniesHub();
+        }
+
+        window.addEventListener('popstate', function(event) {
+            window.location.reload();
+        });
+        
+        function renderCompaniesHub() {
+            document.getElementById('cart-bar').style.display = 'none';
+            document.getElementById('header-title').innerHTML = `<i class="fa-solid fa-utensils"></i> Cardápio Digital`;
+            document.getElementById('header-subtitle').textContent = "Selecione um estabelecimento para fazer seu pedido";
+            document.getElementById('company-info-container').innerHTML = `<p class="header-subtitle">Selecione um estabelecimento abaixo:</p>`;
+
+            const container = document.getElementById('app-container');
+
+            if (state.empresas.length === 0) {
+                container.innerHTML = `<div style="text-align:center; padding: 40px 0;">Nenhuma empresa cadastrada no momento.</div>`;
                 return;
             }
-            cart.forEach(item => {
-                const itemRow = document.createElement('div');
-                itemRow.className = 'review-item';
-                itemRow.innerHTML = `
-                    <div class="review-item-details">
-                        <div class="review-item-name">${item.name}</div>
-                        <div class="review-item-price">R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</div>
+
+            let html = `
+                <div class="section-title">Nossas Lojas</div>
+                <div class="company-list">
+            `;
+
+            state.empresas.forEach(emp => {
+                html += `
+                    <div class="company-card" onclick="selectCompany('${emp.id}')">
+                        <div class="company-name">${emp.nome}</div>
+                        <div class="company-desc">${emp.descricao || 'Cardápio completo disponível.'}</div>
+                        <div class="company-meta">
+                            <div class="company-meta-item">
+                                <i class="fa-solid fa-clock" style="color: var(--accent-yellow);"></i> ${emp.tempoentrega || '30-45 min'}
+                            </div>
+                            <div class="company-meta-item">
+                                <i class="fa-solid fa-motorcycle" style="color: var(--accent-yellow);"></i> Taxa: ${formatMoney(emp.taxaentrega)}
+                            </div>
+                        </div>
                     </div>
-                    <div class="quantity-controls">
-                        <button type="button" class="btn-qty" onclick="changeQuantity('${item.name}', ${item.price}, -1)">-</button>
-                        <div class="qty-number">${item.quantity}</div>
-                        <button type="button" class="btn-qty plus" onclick="changeQuantity('${item.name}', ${item.price}, 1)">+</button>
-                    </div>`;
-                listContainer.appendChild(itemRow);
+                `;
             });
-            updateReviewTotals();
+
+            html += `</div>`;
+            container.innerHTML = html;
         }
 
-        function updateReviewTotals() {
-            const isDelivery = document.querySelector('input[name="delivery-method"]:checked').value === "delivery";
-            const currentDeliveryFee = isDelivery ? DELIVERY_FEE : 0;
-            const finalTotal = total + currentDeliveryFee;
-            document.getElementById('review-subtotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
-            document.getElementById('review-delivery-fee').innerText = `R$ ${DELIVERY_FEE.toFixed(2).replace('.', ',')}`;
-            document.getElementById('review-final-total').innerText = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
-            const deliveryRow = document.getElementById('review-delivery-row');
-            if (isDelivery) { deliveryRow.classList.remove('hidden'); } else { deliveryRow.classList.add('hidden'); }
+        function selectCompany(companyId) {
+            const newUrl = window.location.pathname + '?empresa=' + companyId;
+            window.history.pushState({ companyId }, '', newUrl);
+            handleRouting();
         }
 
-        function openReviewModal() {
-            if (cart.length === 0) { alert("Seu carrinho está vazio!"); return; }
-            renderReviewCartList();
-            document.getElementById('review-modal').classList.add('active');
+        async function loadCompanyMenu(company) {
+            const container = document.getElementById('app-container');
+            container.innerHTML = `
+                <div class="loader-container">
+                    <div class="spinner"></div>
+                    <p style="font-size:0.85rem; color:#6b7280;">Carregando cardápio de ${company.nome}...</p>
+                </div>
+            `;
+
+            let enderecoStr = '';
+            if (company.endereco) {
+                const e = company.endereco;
+                enderecoStr = `${e.logradouro || ''}, ${e.numero || ''}${e.complemento ? ' - ' + e.complemento : ''} - ${e.bairro || ''}, ${e.cidade || ''}`;
+            } else {
+                enderecoStr = 'Endereço não disponível';
+            }
+
+            document.getElementById('header-title').innerHTML = company.nome;
+            document.getElementById('company-info-container').innerHTML = `
+                <div style="margin-top: 5px; line-height: 1.4;">
+                    <span id="store-status" style="font-weight: bold;"></span>
+                    <div style="font-size: 11px; color: #d1d5db; margin-top: 2px;">
+                        <span>📍 ${enderecoStr}</span>
+                    </div>
+                </div>
+                <div class="header-info-badge">
+                    <span><i class="fa-solid fa-phone"></i> ${company.telefone}</span>
+                    <span>•</span>
+                    <span><i class="fa-solid fa-motorcycle"></i> ${formatMoney(company.taxaentrega)}</span>
+                    ${company.minimo ? `<span>• Min: ${formatMoney(company.minimo)}</span>` : ''}
+                </div>
+            `;
+
+            try {
+                const response1 = await fetch(company.link);
+                const rawText = await response1.text();
+                const data = safeJSONParse(rawText);
+
+                // Filter products where "ativo" == "s"
+                state.products = (data[0].produtos || []).filter(p => p.ativo === "s" || p.ativo === "S");
+                state.categories = data[0].categoria || [];
+                state.selectedCategory = 'todas';
+                state.cart = []; // Reset cart for new company
+
+                renderCompanyProductsView();
+                updateCartBar();
+
+            } catch (err) {
+            try {
+                const rawText = retornaProdutos(company.id);
+                const data = safeJSONParse(rawText);
+
+                state.products = (data[0].produtos || []).filter(p => p.ativo === "s" || p.ativo === "S");
+                state.categories = data[0].categoria || [];
+                state.selectedCategory = 'todas';
+                state.cart = [];
+
+                renderCompanyProductsView();
+                updateCartBar();
+            } catch(err) {
+                console.error("Erro ao carregar produtos:", err);
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 40px 0; color: var(--danger-color);">
+                        <i class="fa-solid fa-circle-exclamation" style="font-size:2rem; margin-bottom:10px;"></i>
+                        <p>Erro ao carregar o cardápio desta empresa.</p>
+                    </div>
+                `;
+            }
+          }
         }
 
-        function closeReviewModal() { document.getElementById('review-modal').classList.remove('active'); }
+        function renderCompanyProductsView() {
+            const container = document.getElementById('app-container');
 
-        function toggleAddressVisibility(show) {
-            const addressSection = document.getElementById('address-section');
-            const addressInput = document.getElementById('address');
-            if (show) { addressSection.classList.remove('hidden'); addressInput.required = true; } 
-            else { addressSection.classList.add('hidden'); addressInput.required = false; }
-            updateReviewTotals();
+            let categoriesSet = new Set(state.products.map(p => p.categoria.toLowerCase()));
+            let catChipsHtml = `<button class="category-chip ${state.selectedCategory === 'todas' ? 'active' : ''}" onclick="filterCategory('todas')">Todas</button>`;
+
+            categoriesSet.forEach(cat => {
+                catChipsHtml += `
+                    <button class="category-chip ${state.selectedCategory === cat ? 'active' : ''}" onclick="filterCategory('${cat}')">
+                        ${cat}
+                    </button>
+                `;
+            });
+
+            const filteredProducts = state.selectedCategory === 'todas'
+                ? state.products
+                : state.products.filter(p => p.categoria.toLowerCase() === state.selectedCategory);
+
+            let productsHtml = `<div class="product-grid">`;
+
+            if (filteredProducts.length === 0) {
+                productsHtml += `<p style="font-size:0.85rem; color:#6b7280; text-align:center; padding: 20px;">Nenhum produto nesta categoria.</p>`;
+            } else {
+                filteredProducts.forEach((prod, index) => {
+                    const catKey = prod.categoria.toLowerCase();
+                    const imgUrl = CATEGORY_IMAGES[catKey] || CATEGORY_IMAGES['generic'];
+                    
+                    productsHtml += `
+                        <div class="product-card">
+                            <img src="${imgUrl}" alt="${prod.nome}" class="product-img" onerror="this.src='${CATEGORY_IMAGES.generic}'">
+                            <div class="product-details">
+                                <div class="product-title">${prod.nome}</div>
+                                <div class="product-description">${prod.descricao || ''}</div>
+                                <div class="product-bottom">
+                                    <span class="product-price">${formatMoney(prod.preco_custo)}</span>
+                                    <button class="btn-add" onclick="openProductModal(${index})">
+                                        <i class="fa-solid fa-plus"></i> Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            productsHtml += `</div>`;
+
+            const footerHtml = `
+                <footer class="footer-powered">
+                    powered by <strong>COMPREAQUI - BonAPPetit</strong>
+                </footer>
+            `;
+
+            container.innerHTML = `
+                <div class="category-scroll">
+                    ${catChipsHtml}
+                </div>
+                <div class="section-title">Cardápio</div>
+                ${productsHtml}
+                ${footerHtml}
+            `;
+            
+            checkStoreStatus();
         }
 
-        function sendOrder(event) {
+        function filterCategory(cat) {
+            state.selectedCategory = cat;
+            renderCompanyProductsView();
+        }
+
+        // Função auxiliar que verifica de forma booleana se a loja está aberta
+        function isStoreOpen() {
+            if (!state.currentCompany || !state.currentCompany.atendimento) {
+                return false;
+            }
+
+            const atendimento = state.currentCompany.atendimento;
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+
+            const dayKeys = [
+                { inicio: 'inicioDomingo', fim: 'fimDomingo' },
+                { inicio: 'inicioSegunda', fim: 'fimSegunda' },
+                { inicio: 'inicioTerca', fim: 'fimTerca' },
+                { inicio: 'inicioQuarta', fim: 'fimQuarta' },
+                { inicio: 'inicioQuinta', fim: 'fimQuinta' },
+                { inicio: 'inicioSexta', fim: 'fimSexta' },
+                { inicio: 'inicioSabado', fim: 'fimSabado' }
+            ];
+
+            const todayKey = dayKeys[dayOfWeek];
+            const inicioStr = atendimento[todayKey.inicio];
+            const fimStr = atendimento[todayKey.fim];
+
+            if (!inicioStr || !fimStr) return false;
+
+            const parseMinutes = (timeStr) => {
+                const [h, m] = timeStr.split(':').map(Number);
+                return (h * 60) + m;
+            };
+
+            const inicioMin = parseMinutes(inicioStr);
+            let fimMin = parseMinutes(fimStr);
+            const atualMin = (now.getHours() * 60) + now.getMinutes();
+
+            if (fimMin <= inicioMin) {
+                if (fimMin === inicioMin) return false;
+                return atualMin >= inicioMin || atualMin < fimMin;
+            }
+            return atualMin >= inicioMin && atualMin < fimMin;
+        }
+
+        function openProductModal(productIndex) {
+            // Verifica se a empresa está aberta antes de permitir a adição do produto
+            if (!isStoreOpen()) {
+                showToast("🔴 Desculpe, o estabelecimento está fechado no momento e não aceita pedidos.");
+                return;
+            }
+
+            const filtered = state.selectedCategory === 'todas'
+                ? state.products
+                : state.products.filter(p => p.categoria.toLowerCase() === state.selectedCategory);
+            
+            const prod = filtered[productIndex];
+            state.activeModalProduct = prod;
+            state.activeProductQty = 1;
+            state.selectedOptions = [];
+
+            document.getElementById('p-modal-title').textContent = prod.nome;
+            document.getElementById('p-modal-desc').textContent = prod.descricao || 'Sem descrição.';
+            document.getElementById('p-modal-qty').textContent = state.activeProductQty;
+
+            const optionsContainer = document.getElementById('p-modal-options');
+            optionsContainer.innerHTML = '';
+
+            if (prod.composicao && Array.isArray(prod.composicao) && prod.composicao.length > 0) {
+                prod.composicao.forEach((item) => {
+                    const nomeComp = item.name || item.nome;
+                    const precoComp = parseFloat(item.preco) || 0;
+
+                    optionsContainer.innerHTML += `
+                        <label class="option-item">
+                            <span>${nomeComp} (+ ${formatMoney(precoComp)})</span>
+                            <input type="checkbox" onchange="toggleOption('${nomeComp.replace(/'/g, "")}', ${precoComp}, this.checked)">
+                        </label>
+                    `;
+                });
+            } else {
+                optionsContainer.innerHTML = `<p style="font-size: 0.8rem; color: var(--text-muted);">Sem adicionais/opcionais para este item.</p>`;
+            }
+
+            updateModalPrice();
+            document.getElementById('product-modal').classList.add('active');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.remove('active');
+        }
+
+        function toggleOption(optionName, optionPrice, isChecked) {
+            if (isChecked) {
+                state.selectedOptions.push({ name: optionName, preco: optionPrice });
+            } else {
+                state.selectedOptions = state.selectedOptions.filter(o => o.name !== optionName);
+            }
+            updateModalPrice();
+        }
+
+        function adjustProductQty(delta) {
+            state.activeProductQty = Math.max(1, state.activeProductQty + delta);
+            document.getElementById('p-modal-qty').textContent = state.activeProductQty;
+            updateModalPrice();
+        }
+
+        function updateModalPrice() {
+            if (!state.activeModalProduct) return;
+            
+            const basePrice = parseFloat(state.activeModalProduct.preco_custo) || 0;
+            const extraPrice = state.selectedOptions.reduce((sum, opt) => sum + opt.preco, 0);
+            const unitPrice = basePrice + extraPrice;
+            const totalPrice = unitPrice * state.activeProductQty;
+
+            document.getElementById('p-modal-price').textContent = formatMoney(totalPrice);
+        }
+
+        function confirmAddToCart() {
+            if (!state.activeModalProduct) return;
+
+            const basePrice = parseFloat(state.activeModalProduct.preco_custo) || 0;
+            const extraPrice = state.selectedOptions.reduce((sum, opt) => sum + opt.preco, 0);
+            const unitPriceWithExtras = basePrice + extraPrice;
+
+            const opcoesNomes = state.selectedOptions.map(o => `${o.name} (+${formatMoney(o.preco)})`);
+
+            const cartItem = {
+                id: Date.now(),
+                nome: state.activeModalProduct.nome,
+                preco: unitPriceWithExtras,
+                quantidade: state.activeProductQty,
+                opcoes: opcoesNomes
+            };
+
+            state.cart.push(cartItem);
+            closeProductModal();
+            updateCartBar();
+            showToast("Produto adicionado ao carrinho!");
+        }
+
+        function updateCartBar() {
+            const bar = document.getElementById('cart-bar');
+            if (state.cart.length === 0) {
+                bar.style.display = 'none';
+                return;
+            }
+
+            bar.style.display = 'flex';
+            const totalQty = state.cart.reduce((sum, item) => sum + item.quantidade, 0);
+            const subtotal = state.cart.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+
+            document.getElementById('cart-count-text').textContent = `${totalQty} ${totalQty === 1 ? 'item' : 'itens'} no carrinho`;
+            document.getElementById('cart-total-text').textContent = formatMoney(subtotal);
+        }
+
+        function openCartModal() {
+            renderCartModalItems();
+            updateCartSummary();
+            document.getElementById('cart-modal').classList.add('active');
+        }
+
+        function closeCartModal() {
+            document.getElementById('cart-modal').classList.remove('active');
+        }
+
+        function renderCartModalItems() {
+            const container = document.getElementById('cart-items-list');
+            //if (state.cart.length === 0) {
+            if (!state.cart || state.cart.length === 0) {
+                container.innerHTML = `<p style="font-size:0.85rem; color:#6b7280; text-align:center;">Seu carrinho está vazio.</p>`;
+                return;
+            }
+
+            let html = '';
+            state.cart.forEach((item, index) => {
+                const itemTotal = item.preco * item.quantidade;
+                //const optsText = item.opcoes.length > 0 ? item.opcoes.join(', ') : 'Padrão';
+                const optsText = (item.opcoes && Array.isArray(item.opcoes) && item.opcoes.length > 0) 
+                    ? item.opcoes.join(', ') 
+                    : 'Padrão';
+
+                html += `
+                    <div class="cart-item">
+                        <div>
+                            <div class="cart-item-title">${item.nome} (x${item.quantidade})</div>
+                            <div class="cart-item-sub">${optsText}</div>
+                            <div class="cart-item-price">${formatMoney(itemTotal)}</div>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <button type="button" class="btn-qty" style="width:28px; height:28px; font-size:0.9rem;" onclick="changeCartQty(${index}, -1)">-</button>
+                            <button type="button" class="btn-qty" style="width:28px; height:28px; font-size:0.9rem;" onclick="changeCartQty(${index}, 1)">+</button>
+                            <button type="button" style="background:none; border:none; color:var(--danger-color); font-size:1rem; cursor:pointer; margin-left:4px;" onclick="removeFromCart(${index})">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function changeCartQty(index, delta) {
+            state.cart[index].quantidade += delta;
+            if (state.cart[index].quantidade <= 0) {
+                state.cart.splice(index, 1);
+            }
+            renderCartModalItems();
+            updateCartSummary();
+            updateCartBar();
+            if (state.cart.length === 0) {
+                closeCartModal();
+            }
+        }
+
+        function removeFromCart(index) {
+            state.cart.splice(index, 1);
+            renderCartModalItems();
+            updateCartSummary();
+            updateCartBar();
+            if (state.cart.length === 0) {
+                closeCartModal();
+            }
+        }
+
+        function updateCartSummary() {
+            const subtotal = state.cart.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            const isDelivery = document.querySelector('input[name="tipoEntrega"]:checked').value === 'delivery';
+            const taxa = isDelivery ? (state.currentCompany ? state.currentCompany.taxaentrega : 0) : 0;
+            const total = subtotal + taxa;
+
+            document.getElementById('sum-subtotal').textContent = formatMoney(subtotal);
+            document.getElementById('sum-taxa').textContent = formatMoney(taxa);
+            document.getElementById('sum-total').textContent = formatMoney(total);
+        }
+
+        function toggleAddressField(isDelivery) {
+            const endGroup = document.getElementById('endereco-group');
+            const endInput = document.getElementById('c-endereco');
+            
+            if (isDelivery) {
+                endGroup.style.display = 'flex';
+                endInput.value = '';
+                endInput.required = true;
+            } else {
+                endGroup.style.display = 'none';
+                endInput.value = 'Retirada no Local';
+                endInput.required = false;
+            }
+            updateCartSummary();
+        }
+
+        function handlePaymentChange(val) {
+            const trocoGroup = document.getElementById('troco-group');
+            if (val === 'DINHEIRO') {
+                trocoGroup.style.display = 'flex';
+            } else {
+                trocoGroup.style.display = 'none';
+            }
+        }
+
+        function resetCart() {
+            state.cart = [];
+            updateCartBar();
+            closeCartModal();
+        }
+
+        function handleCheckout(event) {
             event.preventDefault();
-            if (cart.length === 0) { alert("Adicione itens antes!"); return; }
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const method = document.querySelector('input[name="delivery-method"]:checked').value;
-            const address = document.getElementById('address').value;
-            const payment = document.getElementById('payment').value;
-            let itemsText = "";
-            cart.forEach(item => { itemsText += `• *${item.quantity}x* ${item.name} (R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')})\n`; });
-            const isDelivery = method === "delivery";
-            const finalTotal = isDelivery ? (total + DELIVERY_FEE) : total;
-            let message = `🍔 *NOVO PEDIDO CONFIRMADO* 🍔\n\n👤 *Cliente:* ${name}\n📞 *Contato:* ${phone}\n📌 *Modalidade:* ${isDelivery ? "🛵 Delivery" : "🛍️ Retirada"}\n`;
-            if (isDelivery) { message += `📍 *Endereço:* ${address}\n`; }
-            message += `💳 *Pagamento:* ${payment}\n\n🛒 *Itens:*\n${itemsText}\n`;
-            if (isDelivery) { message += `Subtotal: R$ ${total.toFixed(2).replace('.', ',')}\nTaxa: R$ ${DELIVERY_FEE.toFixed(2).replace('.', ',')}\n`; }
-            message += `💰 *Total Geral: R$ ${finalTotal.toFixed(2).replace('.', ',')}*`;
-            window.open(`https://whatsapp.com{WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`, '_blank');
+
+            if (!isStoreOpen()) {
+                showToast("🔴 O estabelecimento está fechado no momento.");
+                return;
+            }
+
+            if (state.cart.length === 0) {
+                showToast("Adicione produtos ao carrinho antes de finalizar.");
+                return;
+            }
+
+            const subtotal = state.cart.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            const valorMinimo = state.currentCompany ? (parseFloat(state.currentCompany.minimo) || 0) : 0;
+
+
+            const nomeInput = document.getElementById('c-nome');
+            const telInput = document.getElementById('c-telefone');
+            const endInput = document.getElementById('c-endereco');
+            const pagSelect = document.getElementById('c-pagamento');
+            const trocoInput = document.getElementById('c-troco');
+            const obsInput = document.getElementById('c-obs');
+            const tipoEntrega = document.querySelector('input[name="tipoEntrega"]:checked').value;
+
+            let isValid = true;
+
+            if (nomeInput.value.trim().length < 3 || nomeInput.value.trim().length > 50) {
+                document.getElementById('err-nome').style.display = 'block';
+                nomeInput.classList.add('input-error');
+                isValid = false;
+            } else {
+                document.getElementById('err-nome').style.display = 'none';
+                nomeInput.classList.remove('input-error');
+            }
+
+            const cleanTel = telInput.value.replace(/\D/g, '');
+            if (cleanTel.length < 8 || cleanTel.length > 14) {
+                document.getElementById('err-telefone').style.display = 'block';
+                telInput.classList.add('input-error');
+                isValid = false;
+            } else {
+                document.getElementById('err-telefone').style.display = 'none';
+                telInput.classList.remove('input-error');
+            }
+
+            if (tipoEntrega === 'delivery') {
+                if (endInput.value.trim().length < 8 || endInput.value.trim().length > 60) {
+                    document.getElementById('err-endereco').style.display = 'block';
+                    endInput.classList.add('input-error');
+                    isValid = false;
+                } else {
+                    document.getElementById('err-endereco').style.display = 'none';
+                    endInput.classList.remove('input-error');
+                }
+            }
+
+            if (!isValid) return;
+
+            const taxa = tipoEntrega === 'delivery' ? (state.currentCompany ? state.currentCompany.taxaentrega : 0) : 0;
+            const total = subtotal + taxa;
+
+            if (total < valorMinimo) {
+                showToast(`O valor mínimo para pedidos nesta empresa é de ${formatMoney(valorMinimo)}.`);
+                return;
+            }
+
+            // Format WhatsApp Message
+            let msg = `* NOVO PEDIDO - ${state.currentCompany ? state.currentCompany.nome.toUpperCase() : 'CARDÁPIO'}*\n\n`;
+            msg += `*Cliente:* ${nomeInput.value.trim()}\n`;
+            msg += `*Telefone:* ${telInput.value.trim()}\n`;
+            msg += `*Tipo:* ${tipoEntrega === 'delivery' ? ' Delivery' : ' Retirada no Local'}\n`;
+            
+            if (tipoEntrega === 'delivery') {
+                msg += `*Endereço:* ${endInput.value.trim()}\n`;
+            }
+            
+            msg += `*Pagamento:* ${pagSelect.value}\n`;
+            if (pagSelect.value === 'DINHEIRO' && trocoInput.value.trim()) {
+                msg += `*Troco para:* ${trocoInput.value.trim()}\n`;
+            }
+            if (obsInput.value.trim()) {
+                msg += `*Observações:* ${obsInput.value.trim()}\n`;
+            }
+
+            msg += `\n* ITENS DO PEDIDO:*\n`;
+            state.cart.forEach((item, idx) => {
+                const itemTotal = item.preco * item.quantidade;
+                const opts = item.opcoes.length > 0 ? ` (${item.opcoes.join(', ')})` : '';
+                msg += `${idx + 1}. ${item.quantidade}x ${item.nome}${opts} - ${formatMoney(itemTotal)}\n`;
+            });
+
+            msg += `\n------------------------------\n`;
+            msg += `*Subtotal:* ${formatMoney(subtotal)}\n`;
+            if (tipoEntrega === 'delivery') {
+                msg += `*Taxa de Entrega:* ${formatMoney(taxa)}\n`;
+            }
+            msg += `*TOTAL DO PEDIDO:* ${formatMoney(total)}\n`;
+
+            const encodedMsg = encodeURIComponent(msg);
+            const whatsappUrl = `https://wa.me/${WHATSAPP_TARGET}?text=${encodedMsg}`;
+
+            window.open(whatsappUrl, '_blank');
+
+            setTimeout(() => {
+                const confirmRes = confirm("Seu pedido foi finalizado e enviado com sucesso no WhatsApp?");
+                if (confirmRes) {
+                    resetCart();
+                    showToast("Pedido finalizado com sucesso!");
+                }
+            }, 600);
+        }
+        
+        function checkStoreStatus() {
+            const statusElement = document.getElementById('store-status');
+            if (!statusElement) return;
+
+            if (isStoreOpen()) {
+                statusElement.innerHTML = "🟢 Aberto Agora";
+                statusElement.style.color = "#4caf50";
+            } else {
+                statusElement.innerHTML = "🔴 Fechado no momento";
+                statusElement.style.color = "#f44336";
+            }
+        }
+        
+        document.getElementById('c-telefone').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        function retornaEmpresas(){
+            return `[
+                 {
+                  "empresa": {
+                    "id": "lanches-avenida",
+                    "link": "https://gist.githubusercontent.com/gustavoamorimqueiroz1/ffa6262e6c52acfcc27c3bbaf57f0f4e/raw/produtos_.txt",
+                    "nome": "Dr. Burguer",
+                    "descricao": "O melhor hamburguer artesanal",
+                    "ativa": true,
+                    "telefone": "+55 (11) 4003-1234",
+                    "taxaentrega": 6.00,
+                    "tempoentrega": "20 a 40 min.",
+                    "minimo": 20.00,
+                    "endereco": {
+                      "logradouro": "Avenida Paulista",
+                      "numero": "1000",
+                      "complemento": "Edifício Corporate, Sala 402",
+                      "bairro": "Bela Vista",
+                      "cidade": "São Paulo",
+                      "estado": "SP",
+                      "cep": "01310-100",
+                      "pais": "Brasil"
+                    },
+                    "atendimento": {
+                      "inicioSegunda": "18:00",
+                      "fimSegunda": "18:00",
+                      "inicioTerca": "18:00",
+                      "fimTerca": "23:30",
+                      "inicioQuarta": "18:00",
+                      "fimQuarta": "23:30",
+                      "inicioQuinta": "18:00",
+                      "fimQuinta": "23:30",
+                      "inicioSexta": "18:00",
+                      "fimSexta": "23:30",
+                      "inicioSabado": "18:00",
+                      "fimSabado": "23:30",
+                      "inicioDomingo": "18:00",
+                      "fimDomingo": "23:30"
+                    }
+                  }
+                 },
+                 {
+                  "empresa": {
+                    "id": "pizzaria-peperoni",
+                    "link": "https://gist.githubusercontent.com/gustavoamorimqueiroz1/ae96b99917a000a43660401119b89efb/raw/produtosPizzaria_.txt",
+                    "nome": "Pizzaria Peperoni",
+                    "descricao": "Pizzas e massas",
+                    "ativa": true,
+                    "telefone": "+55 (11) 4003-1278",
+                    "taxaentrega": 7.00,
+                    "tempoentrega": "20 a 30 min.",
+                    "minimo": 30.00,
+                    "endereco": {
+                      "logradouro": "Avenida Paulista",
+                      "numero": "1000",
+                      "complemento": "Edifício Corporate, Sala 403",
+                      "bairro": "Boa Vista",
+                      "cidade": "São Paulo",
+                      "estado": "SP",
+                      "cep": "01310-120",
+                      "pais": "Brasil"
+                    },
+                    "atendimento": {
+                      "inicioSegunda": "8:00",
+                      "fimSegunda": "23:30",
+                      "inicioTerca": "8:00",
+                      "fimTerca": "23:30",
+                      "inicioQuarta": "8:00",
+                      "fimQuarta": "23:30",
+                      "inicioQuinta": "8:00",
+                      "fimQuinta": "23:30",
+                      "inicioSexta": "8:00",
+                      "fimSexta": "23:30",
+                      "inicioSabado": "8:00",
+                      "fimSabado": "23:30",
+                      "inicioDomingo": "8:00",
+                      "fimDomingo": "23:30"
+                    }
+                  }
+                 }
+                ]`;
+        }
+        
+
+        function retornaProdutos(empresaId){
+            if(empresaId == "lanches-avenida")
+            {  
+             return `[{
+             "categoria":[
+              { "tipocategoria": "hamburguer"},
+              { "tipocategoria": "pizza"},
+              { "tipocategoria": "sobremesa"},
+              { "tipocategoria": "acompanhamento"},
+              { "tipocategoria": "bebida"},
+              { "tipocategoria": "mais"},
+              { "tipocategoria": "prato"},
+              { "tipocategoria": "+mais"}
+             ],
+             "produtos": [
+                {
+                  "nome": "Hamburguer",
+                  "descricao": "Pão, bife, salada",
+                  "categoria": "hamburguer",
+                  "preco_custo": 15.00,
+                  "composicao": [
+                    { name: "Queijo Extra", preco: 4.00 },
+                    { name: "Batata Frita Peq.", preco: 7.00 },
+                    { name: "Bacon Crocante", preco: 5.00 }
+                  ],
+                  "ativo": "s"
+                },
+                {
+                  "nome": "X-Burguer",
+                  "descricao": "Pão, bife, queijo, salada",
+                  "categoria": "hamburguer",
+                  "preco_custo": 17.00,
+                  "ativo": "s",
+                  "composicao": [
+                    { name: "Queijo Extra", preco: 4.00 },
+                    { name: "Batata Frita Peq.", preco: 7.00 },
+                    { name: "Bacon Crocante", preco: 5.00 }
+                  ]
+                },
+                {
+                  "nome": "X-Bacon burguer",
+                  "descricao": "Pão, bife, queijo, bacon, salada",
+                  "categoria": "hamburguer",
+                  "preco_custo": 17.00,
+                  "ativo": "n"
+                },  
+               {
+                  "nome": "Coca-Cola lata",
+                  "descricao": "300ml",
+                  "categoria": "bebida",
+                  "preco_custo": 7.00,
+                  "ativo": "s"
+                }, 
+                {
+                  "nome": "Guaraná lata",
+                  "descricao": "300ml",
+                  "categoria": "bebida",
+                  "preco_custo": 7.00,
+                  "ativo": "s"
+                },
+                {
+                  "nome": "Sprite",
+                  "descricao": "300ml",
+                  "categoria": "bebida",
+                  "preco_custo": 7.00,
+                  "ativo": "s"
+                } 
+              ]
+            }]`;
+            }
+            else if(empresaId == "pizzaria-peperoni")
+            {
+                return `[{
+                    "categoria":[
+                        { "tipocategoria": "pizza"},
+                        { "tipocategoria": "bebida"},
+                        { "tipocategoria": "sobremesa"}
+                    ],
+                    "produtos": [
+                        {
+                            "nome": "Pizza Calabresa",
+                            "descricao": "Mussarela, calabresa, cebola",
+                            "categoria": "pizza",
+                            "preco_custo": 35.00,
+                            "ativo": "s"
+                        },
+                        {
+                            "nome": "Pizza Portuguesa",
+                            "descricao": "Mussarela, presunto, ovo, cebola",
+                            "categoria": "pizza",
+                            "preco_custo": 38.00,
+                            "ativo": "s"
+                        },
+                        {
+                            "nome": "Coca-Cola 2L",
+                            "descricao": "",
+                            "categoria": "bebida",
+                            "preco_custo": 12.00,
+                            "ativo": "s"
+                        },
+                        {
+                            "nome": "Guaraná 2L",
+                            "descricao": "",
+                            "categoria": "bebida",
+                            "preco_custo": 12.00,
+                            "ativo": "s"
+                        },
+                        {
+                            "nome": "Sorvete Napolitano",
+                            "descricao": "",
+                            "categoria": "sobremesa",
+                            "preco_custo": 15.00,
+                            "ativo": "s"
+                        }
+                 ]
+            }]`;
+         }
         }
     </script>
 </body>
