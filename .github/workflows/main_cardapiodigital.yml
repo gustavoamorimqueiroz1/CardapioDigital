@@ -31,11 +31,6 @@ jobs:
         run: msbuild /nologo /verbosity:m /t:Build /p:_PackageTempDir="\published\"
 
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: ASP-app
-          path: '/published/**'
 
   deploy:
     runs-on: windows-latest
