@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CompreAqui.Api</name>
+    </assembly>
+    <members>
+        <member name="M:CompreAqui.Api.Configuration.StartupConfiguration.AddJwtCompreAqui(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Metodo extensão de IServiceCollection com a finalidade de definir os parametros para configuração JWT
+            </summary>
+            <param name="services">IServiceCollection</param>
+            <param name="conf">IConfiguration</param>
+        </member>
+        <member name="M:CompreAqui.Api.Configuration.StartupConfiguration.AddDependencies(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Metodo extensão IServiceCollection Adiciona as dependencias necessárias
+            </summary>
+            <param name="services">IServiceCollection da Aplicação</param>
+            <param name="conf">IConfiguration</param>
+        </member>
+        <member name="M:CompreAqui.Api.Configuration.StartupConfiguration.RegisterAllTypes``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[],Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Metodo extensão IServiceCollection Registra todos dependências do tipo T
+            </summary>
+            <typeparam name="T">Tipo a ser instanciado</typeparam>
+            <param name="services">Extensão de IServiceCollection</param>
+            <param name="assemblies">instancia da interface para conseguir pegar o executável/dll que contenham todas as classes</param>
+            <param name="lifetime">tempo de vida - Scoped, Singleton ou Transient</param>
+        </member>
+        <member name="M:CompreAqui.Api.Configuration.StartupConfiguration.AddSwaggerCompreAqui(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Metodo extensão IServiceCollection Adiciona configuração Swagger
+            </summary>
+            <param name="services">IServiceCollection da Aplicação</param>
+        </member>
+        <member name="M:CompreAqui.Api.Configuration.StartupConfiguration.RegisterMiddlewareSwagger(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Metodo extensão IApplicationBuilder Registra o Swagger no app
+            </summary>
+            <param name="app">App em execução</param>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.CategoryProductController.GetAll">
+            <summary>
+            Busca todas as categorias de produto do sistema
+            </summary>
+            <returns>Lista categorias de produto (JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.CustomerController.GetAll">
+            <summary>
+            Busca todos clientes do sistema
+            </summary>
+            <returns>Lista clientes (JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.ExternalAuthController.Facebook(CompreAqui.Domain.Commands.Inputs.FacebookCommand)">
+            <summary>
+            Autenticação via token do Facebook
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.ImageController.UploadImageAzure(CompreAqui.Domain.Commands.Inputs.ImageCommands.GetBase64ImageCommand)">
+            <summary>
+            Insere uma imagem em Base64 no Azure
+            </summary>
+            <returns>Insere Imagem(JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.OrderController.PostOrder(CompreAqui.Domain.Commands.Inputs.OrderCommands.CreateOrderCommand)">
+            <summary>
+            Cria um novo pedido
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.ProductController.GetAllProducts(CompreAqui.Domain.Commands.Inputs.ProductCommands.GetAllProductsCommand)">
+            <summary>
+            Busca todos produtos do sistema
+            </summary>
+            <returns>Lista produtos (JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserAddressController.#ctor(CompreAqui.Domain.Handlers.UserAddressHandler,CompreAqui.Domain.Contracts.IAppSettings)">
+            <summary>
+            Construtor controller Endereço de Usuário
+            </summary>
+            <param name="handler">Servico de acesso aos Dados</param>
+            <param name="settings">Configurações Gerais do sistema</param>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserAddressController.GetAll">
+            <summary>
+            Busca todos os endereços dos usuários do sistema
+            </summary>
+            <returns>Lista os endereços dos usuários (JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserAddressController.GetCustomerByUserId(CompreAqui.Domain.Commands.Inputs.UserAddressCommands.GetUserAddressByIdUserCommand)">
+            <summary>
+            Busca endereço do usuário pelo userid
+            </summary>
+            <returns>Lista endereço do usuário pelo userid (JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserAddressController.PostUserAddress(CompreAqui.Domain.Commands.Inputs.UserAddressCommands.CreateUserAddressCommand)">
+            <summary>
+            Adiciona um novo endereço do usuário
+            </summary>
+        </member>
+        <member name="T:CompreAqui.Api.Controllers.UserController">
+            <summary>
+            Controller Usuário
+            </summary>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.#ctor(CompreAqui.Domain.Handlers.UserHandler,CompreAqui.Domain.Contracts.IAppSettings)">
+            <summary>
+            Construtor controller Usuário
+            </summary>
+            <param name="handler">Servico de acesso aos Dados</param>
+            <param name="settings">Configurações Gerais do sistema</param>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.GetAll">
+            <summary>
+            Busca todos usuários do sistema
+            </summary>
+            <returns>Lista usuários (JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.GetUserByName(CompreAqui.Domain.Commands.Inputs.UserCommands.GetUserByUserNameCommand)">
+            <summary>
+            Busca usuário pelo username
+            </summary>
+            <returns>Lista usuários (JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.GetUserByEmail(CompreAqui.Domain.Commands.Inputs.UserCommands.GetUserByEmailCommand)">
+            <summary>
+            Busca usuário pelo e-mail
+            </summary>
+            <returns>Lista usuário pelo e-mail (JSON)</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.PostUser(CompreAqui.Domain.Commands.Inputs.UserCommands.CreateUserCommand)">
+            <summary>
+            Adiciona um novo usuário
+            </summary>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.LoginUserName(CompreAqui.Domain.Commands.Inputs.UserCommands.GetUserNameLoginCommand)">
+            <summary>
+            Login do sistema pelo username e password
+            </summary>
+            <param name="loginUsuario">Objeto Usuário contendo username e senha</param>
+            <returns>Token JWT para autenticação no sistema</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.LoginEmail(CompreAqui.Domain.Commands.Inputs.UserCommands.GetEmailLoginCommand)">
+            <summary>
+            Login do sistema pelo e-mail e password
+            </summary>
+            <remarks>
+            Sample request:
+                POST 
+                {
+                   "email": "YOUR EMAIL",
+                   "password": "YOUR PASSWORD"
+                }
+            </remarks>
+            <param name="loginUsuario">Objeto Usuário contendo email e senha</param>
+            <returns>Token JWT para autenticação no sistema</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.ResetPassword(CompreAqui.Domain.Commands.Inputs.ResetPasswordCommand)">
+            <summary>
+            Esqueci minha senha através do e-mail
+            </summary>
+            <param name="reset">Objeto que recebe o e-mail do usuário</param>
+            <returns>Token JWT para autenticação no sistema</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.ChangePassword(CompreAqui.Domain.Commands.Inputs.UserCommands.UpdateUserPasswordCommand)">
+            <summary>
+            Altera a senha do usuário
+            </summary>
+            <param name="update"></param>
+            <returns>Altera a senha do usuário</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Controllers.UserController.UpdateUser(CompreAqui.Domain.Commands.Inputs.UserCommands.UpdateUserCommand)">
+            <summary>
+            Altera informações do usuário
+            </summary>
+            <param name="update"></param>
+            <returns>Altera informações do usuário</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Cria o ambiente para se trabalhar
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CompreAqui.Api.Tools.Encrypting.Criptografa(System.String)">
+            <summary>
+            Funcao Para Criptografar ou retornar o conteudo descriptografado
+            </summary>
+            <param name="conteudo">String a Ser Criptograda</param>
+            <returns>String Criptografada</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Tools.Encrypting.Descriptografa(System.String)">
+            <summary>
+            Funcao Para Descriptografar string Criptografada
+            </summary>
+            <param name="conteudo">String a Ser DesCriptograda</param>
+            <returns>String DesCriptografada</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Tools.Encrypting.TiraAcentos(System.String)">
+            <summary>
+            Remove acentos de uma string
+            </summary>
+            <param name="texto">String de origem a ser removido os acentos</param>
+            <returns>String com os acentos removidos</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Tools.GoogleTokenGenerator.Gerar(CompreAqui.Domain.Models.Settings.JwtSetting)">
+            <summary>
+            Gera o token JWT com os dados passados pelo parametro
+            </summary>
+            <param name="jwtSettings">dados para geração do token JWT</param>
+            <returns>string contendo o token</returns>
+        </member>
+        <member name="M:CompreAqui.Api.Tools.TokenGenerator.Gerar(CompreAqui.Domain.Models.Settings.JwtSetting)">
+            <summary>
+            Gera o token JWT com os dados passados pelo parametro
+            </summary>
+            <param name="jwtSettings">dados para geração do token JWT</param>
+            <returns>string contendo o token</returns>
+        </member>
+    </members>
+</doc>
