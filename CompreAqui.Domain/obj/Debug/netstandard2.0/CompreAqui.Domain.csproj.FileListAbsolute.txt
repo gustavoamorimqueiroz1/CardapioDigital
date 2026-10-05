@@ -1,0 +1,10 @@
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\bin\Debug\netstandard2.0\CompreAqui.Domain.deps.json
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\bin\Debug\netstandard2.0\CompreAqui.Domain.dll
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\bin\Debug\netstandard2.0\CompreAqui.Domain.pdb
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\obj\Debug\netstandard2.0\CompreAqui.Domain.csproj.AssemblyReference.cache
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\obj\Debug\netstandard2.0\CompreAqui.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\obj\Debug\netstandard2.0\CompreAqui.Domain.AssemblyInfoInputs.cache
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\obj\Debug\netstandard2.0\CompreAqui.Domain.AssemblyInfo.cs
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\obj\Debug\netstandard2.0\CompreAqui.Domain.csproj.CoreCompileInputs.cache
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\obj\Debug\netstandard2.0\CompreAqui.Domain.dll
+C:\Users\gustavo.queiroz\Desktop\Totvs\P\CompreAquiApi\CompreAqui\CompreAqui.Domain\obj\Debug\netstandard2.0\CompreAqui.Domain.pdb
