@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A0462EDD-CFC6-4E4F-B076-A045F68B98D3}|CompreAqui.Api\\CompreAqui.Api.csproj|c:\\users\\gustavo.queiroz\\desktop\\totvs\\p\\cardapiodigitalapi\\compreaqui.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0462EDD-CFC6-4E4F-B076-A045F68B98D3}|CompreAqui.Api\\CompreAqui.Api.csproj|solutionrelative:compreaqui.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0462EDD-CFC6-4E4F-B076-A045F68B98D3}|CompreAqui.Api\\CompreAqui.Api.csproj|c:\\users\\gustavo.queiroz\\desktop\\totvs\\p\\cardapiodigitalapi\\compreaqui.api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0462EDD-CFC6-4E4F-B076-A045F68B98D3}|CompreAqui.Api\\CompreAqui.Api.csproj|solutionrelative:compreaqui.api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +27,31 @@
             {
               "$type": "Bookmark",
               "Name": "ST:11:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Api\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "CompreAqui.Api\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Api\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "CompreAqui.Api\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-05T17:22:42.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Api\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "CompreAqui.Api\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Api\\Controllers\\UserController.cs",
+              "RelativeToolTip": "CompreAqui.Api\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAuwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-05T17:21:58.504Z",
+              "EditorCaption": ""
             }
           ]
         }

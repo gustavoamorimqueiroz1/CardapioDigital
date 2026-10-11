@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj": {}
+    "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj": {
+    "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
         "projectName": "CompreAqui.Domain",
-        "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+        "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
         "packagesPath": "C:\\Users\\gustavo.queiroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\obj\\",
+        "outputPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

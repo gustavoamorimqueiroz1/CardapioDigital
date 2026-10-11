@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+4GgLdhzE0A=",
+  "dgSpecHash": "wN4itO34CrI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+  "projectFilePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gustavo.queiroz\\.nuget\\packages\\azure.core\\1.2.2\\azure.core.1.2.2.nupkg.sha512",
     "C:\\Users\\gustavo.queiroz\\.nuget\\packages\\azure.storage.blobs\\12.4.4\\azure.storage.blobs.12.4.4.nupkg.sha512",
@@ -95,9 +95,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "Package 'Azure.Storage.Blobs' 12.4.4 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-64x4-9hc6-r2h6",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
       "libraryId": "Azure.Storage.Blobs",
       "targetGraphs": [
         ".NETStandard,Version=v2.0"
@@ -107,9 +107,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "Package 'MailKit' 2.6.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-9j88-vvj5-vhgr",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
       "libraryId": "MailKit",
       "targetGraphs": [
         ".NETStandard,Version=v2.0"
@@ -119,9 +119,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "Package 'MimeKit' 2.6.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-g7hc-96xr-gvvx",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
       "libraryId": "MimeKit",
       "targetGraphs": [
         ".NETStandard,Version=v2.0"
@@ -131,9 +131,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Newtonsoft.Json' 12.0.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
+      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Domain\\CompreAqui.Domain.csproj",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         ".NETStandard,Version=v2.0"

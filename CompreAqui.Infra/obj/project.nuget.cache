@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wb9zNwbLyY8=",
+  "dgSpecHash": "2BiGjb/hFQs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
+  "projectFilePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gustavo.queiroz\\.nuget\\packages\\azure.core\\1.2.2\\azure.core.1.2.2.nupkg.sha512",
     "C:\\Users\\gustavo.queiroz\\.nuget\\packages\\azure.storage.blobs\\12.4.4\\azure.storage.blobs.12.4.4.nupkg.sha512",
@@ -126,9 +126,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Npgsql' 4.1.4 has a known high severity vulnerability, https://github.com/advisories/GHSA-x9vc-6hfv-hg8c",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
+      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
       "libraryId": "Npgsql",
       "targetGraphs": [
         ".NETStandard,Version=v2.0"
@@ -138,9 +138,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "Package 'System.Data.SqlClient' 4.8.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-8g2p-5pqh-5jmc",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
+      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
       "libraryId": "System.Data.SqlClient",
       "targetGraphs": [
         ".NETStandard,Version=v2.0"
@@ -150,9 +150,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'System.Data.SqlClient' 4.8.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-98g6-xh36-x2p7",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
+      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Infra\\CompreAqui.Infra.csproj",
       "libraryId": "System.Data.SqlClient",
       "targetGraphs": [
         ".NETStandard,Version=v2.0"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bc8vC4CQoKQ=",
+  "dgSpecHash": "ol/Q4PtfXDU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Api\\CompreAqui.Api.csproj",
+  "projectFilePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Api\\CompreAqui.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gustavo.queiroz\\.nuget\\packages\\azure.core\\1.2.2\\azure.core.1.2.2.nupkg.sha512",
     "C:\\Users\\gustavo.queiroz\\.nuget\\packages\\azure.storage.blobs\\12.4.4\\azure.storage.blobs.12.4.4.nupkg.sha512",
@@ -180,9 +180,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "Package 'Microsoft.AspNetCore.Authentication.JwtBearer' 3.1.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-q7cg-43mg-qp69",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Api\\CompreAqui.Api.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Api\\CompreAqui.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiApi\\CompreAqui\\CompreAqui.Api\\CompreAqui.Api.csproj",
+      "filePath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui.Api\\CompreAqui.Api.csproj",
       "libraryId": "Microsoft.AspNetCore.Authentication.JwtBearer",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"

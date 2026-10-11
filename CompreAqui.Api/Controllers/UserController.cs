@@ -211,6 +211,8 @@ namespace CompreAqui.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginEmail([FromBody]GetEmailLoginCommand loginUsuario)
         {
+            return Ok("ola mundo");
+
             loginUsuario.Password = loginUsuario.Password.Criptografa();
             var login = await _handler.EmailLogin(loginUsuario);
             if (login != null)
