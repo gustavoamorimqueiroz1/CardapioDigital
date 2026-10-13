@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiDevs\\CompreAqui\\CompreAqui\\CompreAqui.csproj",
+      "projectUniqueName": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui\\CompreAqui.csproj",
       "projectName": "CompreAqui",
-      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiDevs\\CompreAqui\\CompreAqui\\CompreAqui.csproj",
+      "projectPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui\\CompreAqui.csproj",
       "packagesPath": "C:\\Users\\gustavo.queiroz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CompreAquiDevs\\CompreAqui\\CompreAqui\\obj\\",
+      "outputPath": "C:\\Users\\gustavo.queiroz\\Desktop\\Totvs\\P\\CardapioDigitalApi\\CompreAqui\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
